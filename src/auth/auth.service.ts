@@ -30,7 +30,7 @@ export class AuthService {
         userCredentialsDto.password,
         10,
       );
-      const newUser = await this.userModel.create(userCredentialsDto);
+      const newUser: User = await this.userModel.create(userCredentialsDto);
       return {
         status: true,
         message: 'Successfully signed up',
