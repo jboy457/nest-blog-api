@@ -1,4 +1,11 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  ValidationPipe,
+} from '@nestjs/common';
 import { SuccessResponse } from 'src/interfaces/response.interface';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
@@ -16,6 +23,7 @@ export class AuthController {
   }
 
   @Post('signin')
+  @HttpCode(HttpStatus.OK)
   async signIn(
     @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
   ): Promise<SuccessResponse> {
