@@ -66,4 +66,17 @@ export class PostService {
       throw err;
     }
   }
+
+  async delete(_id: string): Promise<SuccessResponse> {
+    try {
+      await this.postModel.findByIdAndDelete(_id);
+      return {
+        status: true,
+        message: 'Successfully deleted post',
+        data: null,
+      };
+    } catch (err) {
+      throw err;
+    }
+  }
 }

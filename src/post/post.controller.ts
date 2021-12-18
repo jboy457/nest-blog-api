@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -37,5 +38,10 @@ export class PostController {
     @Param('postId') postId: string,
   ): Promise<SuccessResponse> {
     return await this.postService.update(postId, postDto);
+  }
+
+  @Delete(':postId')
+  async deletePost(@Param('postId') postId: string): Promise<SuccessResponse> {
+    return await this.postService.delete(postId);
   }
 }
