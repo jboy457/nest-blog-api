@@ -15,13 +15,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse<Response>();
     const statusCode: number = exception.getStatus();
-    const message: string = exception.message || null;
-
+    const data = exception.getResponse();
     const body = {
       status: false,
-      message,
+      message: data['message'],
     };
-    this.logger.warn(`[${statusCode}] ${message}`);
-    res.status(statusCode).json(body);
+    this.logger.warn(`[${statusCode}] ${data['message']}`);
+    res.status(Array.isArray(data['message']) ? 422 : statusCode).json(body);
   }
 }
